@@ -81,7 +81,7 @@ export default function HeroSection() {
       </div>
 
       {/* Centered 1440 container */}
-      <div className="relative z-[2] flex flex-col flex-1 w-full max-w-[1600px] mx-auto px-6 md:pl-40 md:pr-16">
+      <div className="relative z-[2] flex flex-col flex-1 w-full max-w-[1600px] pt-16 md:pt-0 mx-auto px-6 md:pl-40 md:pr-16">
 
       {/* Hero content */}
       <div className="relative z-[2] flex flex-col justify-center flex-1">
