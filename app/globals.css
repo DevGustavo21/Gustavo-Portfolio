@@ -3,25 +3,141 @@
 @tailwind utilities;
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --color-bg:             #080808;
+  --color-bg-secondary:   #111110;
+  --color-primary:        #E8E8E0;
+  --color-accent:         #C8FF00;
+  --color-text:           #E8E8E0;
+  --color-text-secondary: #A8A8A0;   /* readable muted */
+  --color-muted:          #606058;   /* decorative muted, not body text */
+  --color-border:         #2A2A28;
+  --color-accent-light:   #D4FF33;
+  --color-accent-dark:    #A8D900;
+
+  --font-display: var(--font-clash), 'Clash Display', sans-serif;
+  --font-body:    var(--font-cabinet), 'Cabinet Grotesk', sans-serif;
+  --font-mono:    var(--font-space-mono), 'Space Mono', monospace;
+
+  --size-hero: clamp(3rem, 13vw, 10rem);
+  --size-h1:   clamp(2.8rem, 5.5vw, 5.5rem);
+  --size-h2:   clamp(1.8rem, 3vw, 3rem);
+  --size-h3:   clamp(1.2rem, 1.8vw, 1.6rem);
+  --size-body: 1.125rem;
+
+  --tracking-hero: -0.05em;
+  --tracking-label: 0.15em;
+  --leading-body: 1.8;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  background-color: var(--color-bg);
+  color: var(--color-text);
+  font-family: var(--font-body);
+  overflow-x: hidden;
+  scroll-behavior: smooth;
 }
 
 body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+  background-color: var(--color-bg);
+  overflow-x: hidden;
+}
+
+@media (pointer: fine) {
+  body {
+    cursor: none;
+  }
+}
+
+::-webkit-scrollbar { width: 2px; }
+::-webkit-scrollbar-track { background: var(--color-bg); }
+::-webkit-scrollbar-thumb { background: var(--color-muted); }
+
+::selection {
+  background: var(--color-accent);
+  color: var(--color-bg);
+}
+
+input::placeholder,
+textarea::placeholder {
+  color: var(--color-muted);
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  letter-spacing: 0.04em;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+  html { scroll-behavior: auto; }
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 4px;
+}
+:focus:not(:focus-visible) {
+  outline: none;
+}
+
+/* Per-letter glitch effect (hero name) */
+.glitch-letter {
+  position: relative;
+  display: inline-block;
+  cursor: default;
+}
+.glitch-letter::before,
+.glitch-letter::after {
+  content: attr(data-text);
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  pointer-events: none;
+}
+.glitch-letter:hover {
+  color: var(--color-accent);
+}
+.glitch-letter:hover::before {
+  opacity: 0.9;
+  color: #ff2255;
+  animation: glitch-letter-1 0.32s steps(2, jump-none) infinite;
+}
+.glitch-letter:hover::after {
+  opacity: 0.9;
+  color: #00e5ff;
+  animation: glitch-letter-2 0.32s steps(2, jump-none) infinite;
+}
+
+@keyframes glitch-letter-1 {
+  0%   { clip-path: inset(12% 0 60% 0); transform: translate(-3px, -2px); }
+  25%  { clip-path: inset(78% 0 4% 0);  transform: translate(3px, 1px); }
+  50%  { clip-path: inset(38% 0 40% 0); transform: translate(-2px, 2px); }
+  75%  { clip-path: inset(8% 0 72% 0);  transform: translate(3px, -1px); }
+  100% { clip-path: inset(58% 0 18% 0); transform: translate(-3px, 2px); }
+}
+@keyframes glitch-letter-2 {
+  0%   { clip-path: inset(64% 0 12% 0); transform: translate(3px, 2px); }
+  25%  { clip-path: inset(8% 0 78% 0);  transform: translate(-3px, -1px); }
+  50%  { clip-path: inset(44% 0 34% 0); transform: translate(2px, -2px); }
+  75%  { clip-path: inset(72% 0 6% 0);  transform: translate(-3px, 1px); }
+  100% { clip-path: inset(20% 0 56% 0); transform: translate(3px, -2px); }
 }
 
 @layer utilities {
-  .text-balance {
-    text-wrap: balance;
-  }
+  .text-accent    { color: var(--color-accent); }
+  .text-muted     { color: var(--color-muted); }
+  .text-primary   { color: var(--color-primary); }
+  .hover\:text-accent:hover { color: var(--color-accent); }
+  .hover\:border-accent:hover { border-color: var(--color-accent); }
 }

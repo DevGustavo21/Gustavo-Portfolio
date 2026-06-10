@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://gustavomejia.dev/sitemap.xml
+Host: https://gustavomejia.dev
