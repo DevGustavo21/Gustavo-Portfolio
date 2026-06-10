@@ -96,7 +96,7 @@ export default function Footer() {
             <p style={{ fontFamily: "var(--font-display)", color: "var(--color-primary)", fontSize: "1.1rem", fontWeight: 600, letterSpacing: "-0.02em", marginBottom: "0.5rem" }}>
               Gustavo Mejia
             </p>
-            <p style={{ fontFamily: "var(--font-body)", color: "var(--color-text-secondary)", fontSize: "0.9rem", lineHeight: "1.7" }}>
+            <p style={{ fontFamily: "var(--font-body)", color: "var(--color-text-secondary)", fontSize: "16px", lineHeight: "1.7" }}>
               <ScrambleText text={t.footer.role} />
               <br />
               <ScrambleText text={t.footer.cofounder} />{" "}

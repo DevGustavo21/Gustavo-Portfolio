@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { usePathname } from "next/navigation";
 import { motion } from "framer-motion";
 import { useLang } from "@/lib/i18n";
 import ScrambleText from "@/components/ScrambleText";
@@ -26,6 +27,7 @@ function scrollToSection(id: string) {
 
 export default function SideNav() {
   const { t } = useLang();
+  const pathname = usePathname();
   const [active, setActive] = useState("home");
   const [mobileOpen, setMobileOpen] = useState(false);
 
@@ -51,6 +53,9 @@ export default function SideNav() {
     setMobileOpen(false);
     scrollToSection(id);
   };
+
+  // Hide global nav on standalone pages like the suspended-site notice.
+  if (pathname?.startsWith("/suspended")) return null;
 
   return (
     <>
@@ -109,34 +114,37 @@ export default function SideNav() {
         <LanguageSwitcher />
       </motion.div>
 
-      {/* Mobile hamburger button */}
-      <button
-        onClick={() => setMobileOpen((o) => !o)}
-        className="fixed top-6 right-6 z-[60] flex flex-col gap-[5px] p-2 md:hidden"
-        aria-label={mobileOpen ? "Cerrar menú" : "Abrir menú"}
-        style={{ background: "none", border: "none", cursor: "pointer" }}
-      >
-        {[0, 1, 2].map((i) => (
-          <motion.span
-            key={i}
-            animate={
-              mobileOpen
-                ? i === 0 ? { rotate: 45, y: 7 }
-                : i === 1 ? { opacity: 0, scaleX: 0 }
-                : { rotate: -45, y: -7 }
-                : { rotate: 0, y: 0, opacity: 1, scaleX: 1 }
-            }
-            transition={{ duration: 0.25 }}
-            style={{
-              display: "block",
-              width: "22px",
-              height: "1.5px",
-              backgroundColor: "var(--color-primary)",
-              transformOrigin: "center",
-            }}
-          />
-        ))}
-      </button>
+      {/* Mobile top-right controls: language switcher + hamburger */}
+      <div className="fixed top-6 right-6 z-[60] flex items-center gap-4 md:hidden">
+        <LanguageSwitcher fontSize="16px" />
+        <button
+          onClick={() => setMobileOpen((o) => !o)}
+          className="flex flex-col gap-[5px] p-2"
+          aria-label={mobileOpen ? "Cerrar menú" : "Abrir menú"}
+          style={{ background: "none", border: "none", cursor: "pointer" }}
+        >
+          {[0, 1, 2].map((i) => (
+            <motion.span
+              key={i}
+              animate={
+                mobileOpen
+                  ? i === 0 ? { rotate: 45, y: 7 }
+                  : i === 1 ? { opacity: 0, scaleX: 0 }
+                  : { rotate: -45, y: -7 }
+                  : { rotate: 0, y: 0, opacity: 1, scaleX: 1 }
+              }
+              transition={{ duration: 0.25 }}
+              style={{
+                display: "block",
+                width: "22px",
+                height: "1.5px",
+                backgroundColor: "var(--color-primary)",
+                transformOrigin: "center",
+              }}
+            />
+          ))}
+        </button>
+      </div>
 
       {/* Mobile fullscreen overlay */}
       <motion.div
@@ -169,16 +177,6 @@ export default function SideNav() {
             </motion.a>
           ))}
         </div>
-
-        {/* Mobile language switcher */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={mobileOpen ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-          transition={{ delay: links.length * 0.07 + 0.15 }}
-          className="absolute bottom-24"
-        >
-          <LanguageSwitcher />
-        </motion.div>
 
         <p
           className="absolute bottom-10"

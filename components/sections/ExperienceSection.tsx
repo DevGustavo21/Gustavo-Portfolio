@@ -56,7 +56,7 @@ function RoleRow({ role, index }: { role: Role; index: number }) {
         <h3
           style={{
             fontFamily: "var(--font-display)",
-            fontSize: "clamp(1.1rem, 1.8vw, 1.5rem)",
+            fontSize: "clamp(1.5rem, 4.5vw, 1.5rem)",
             letterSpacing: "-0.02em",
             color: "var(--color-primary)",
             fontWeight: 600,

@@ -169,6 +169,23 @@ const es = {
     contactLabel: "CONTACTO",
     rights: "Todos los derechos reservados",
   },
+  suspended: {
+    statusTag: "ERROR 503 · SERVICIO SUSPENDIDO",
+    metaLeft: "HOST · GUSTAVO MEJIA",
+    metaRight: "CRAFTED CODE HUB",
+    title: "Tu sitio temporal ha sido bajado del servidor.",
+    p1: "Este sitio web estaba alojado de forma temporal como parte de un proyecto en desarrollo. Ha sido retirado del servidor por falta de respuesta o seguimiento por parte del cliente.",
+    p2: "Si eres el propietario y deseas volver a ver tu sitio o reactivar el alojamiento, ponte en contacto directamente con el hoster. Con gusto restauramos el acceso.",
+    contactLabel: "CONTACTAR AL HOSTER",
+    back: "Regresar al inicio",
+    terminal: [
+      "> verificando estado del despliegue...",
+      "> deployment: SUSPENDIDO",
+      "> motivo: sin respuesta del cliente",
+      "> acción requerida: contactar al hoster",
+    ],
+    terminalHighlights: ["SUSPENDIDO", "sin respuesta del cliente"],
+  },
 };
 
 const en: typeof es = {
@@ -335,6 +352,23 @@ const en: typeof es = {
     navigation: "NAVIGATION",
     contactLabel: "CONTACT",
     rights: "All rights reserved",
+  },
+  suspended: {
+    statusTag: "ERROR 503 · SERVICE SUSPENDED",
+    metaLeft: "HOST · GUSTAVO MEJIA",
+    metaRight: "CRAFTED CODE HUB",
+    title: "Your temporary site has been taken down.",
+    p1: "This website was hosted temporarily as part of a project in progress. It has been removed from the server due to a lack of response or follow-up from the client.",
+    p2: "If you're the owner and would like to see your site again or reactivate the hosting, please contact the host directly. We'll be glad to restore access.",
+    contactLabel: "CONTACT THE HOST",
+    back: "Back to home",
+    terminal: [
+      "> checking deployment status...",
+      "> deployment: SUSPENDED",
+      "> reason: no response from client",
+      "> action required: contact the host",
+    ],
+    terminalHighlights: ["SUSPENDED", "no response from client"],
   },
 };
 

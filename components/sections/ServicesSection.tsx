@@ -143,7 +143,7 @@ function ServiceRow({ service, index }: { service: Service; index: number }) {
           style={{
             fontFamily: "var(--font-body)",
             color: "var(--color-text-secondary)",
-            fontSize: "0.88rem",
+            fontSize: "16px",
             lineHeight: "1.7",
           }}
         >

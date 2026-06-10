@@ -5,10 +5,16 @@ import { useEffect, useRef, useState } from "react";
 export default function CustomCursor() {
   const cursorRef = useRef<HTMLDivElement>(null);
   const [hovering, setHovering] = useState(false);
+  const [enabled, setEnabled] = useState(false);
 
+  // Step 1: only enable on pointer-fine devices (no touch / mobile).
   useEffect(() => {
-    // Only on pointer-fine devices
-    if (!window.matchMedia("(pointer: fine)").matches) return;
+    if (window.matchMedia("(pointer: fine)").matches) setEnabled(true);
+  }, []);
+
+  // Step 2: once the dot is rendered, wire up movement + hover detection.
+  useEffect(() => {
+    if (!enabled) return;
 
     const el = cursorRef.current;
     if (!el) return;
@@ -50,7 +56,9 @@ export default function CustomCursor() {
       window.removeEventListener("mousemove", move);
       observer.disconnect();
     };
-  }, []);
+  }, [enabled]);
+
+  if (!enabled) return null;
 
   return (
     <div
@@ -69,6 +77,7 @@ export default function CustomCursor() {
         border: hovering ? "1.5px solid #C8FF00" : "none",
         transition: "width 0.2s ease, height 0.2s ease, background-color 0.2s ease, border 0.2s ease",
         willChange: "transform",
+        transform: "translate(-100px, -100px)",
       }}
     />
   );

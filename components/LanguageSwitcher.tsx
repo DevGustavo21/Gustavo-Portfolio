@@ -5,7 +5,13 @@ import { useLang, type Lang } from "@/lib/i18n";
 
 const OPTIONS: Lang[] = ["es", "en"];
 
-export default function LanguageSwitcher({ className }: { className?: string }) {
+export default function LanguageSwitcher({
+  className,
+  fontSize = "0.65rem",
+}: {
+  className?: string;
+  fontSize?: string;
+}) {
   const { lang, setLang } = useLang();
 
   return (
@@ -22,7 +28,7 @@ export default function LanguageSwitcher({ className }: { className?: string }) 
               style={{
                 fontFamily: "var(--font-mono)",
                 color: "var(--color-border)",
-                fontSize: "0.62rem",
+                fontSize,
               }}
               aria-hidden="true"
             >
@@ -41,7 +47,7 @@ export default function LanguageSwitcher({ className }: { className?: string }) 
               cursor: "pointer",
               padding: "2px 0",
               fontFamily: "var(--font-mono)",
-              fontSize: "0.65rem",
+              fontSize,
               letterSpacing: "0.15em",
               textTransform: "uppercase",
               color: lang === opt ? "var(--color-accent)" : "var(--color-muted)",
