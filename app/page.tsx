@@ -8,6 +8,7 @@ import AboutSection from "@/components/sections/AboutSection";
 import ExperienceSection from "@/components/sections/ExperienceSection";
 import ServicesSection from "@/components/sections/ServicesSection";
 import PortfolioSection from "@/components/sections/PortfolioSection";
+import ToolsSection from "@/components/sections/ToolsSection";
 import ContactSection from "@/components/sections/ContactSection";
 import Footer from "@/components/Footer";
 
@@ -30,6 +31,7 @@ export default function HomePage() {
             <ExperienceSection />
             <ServicesSection />
             <PortfolioSection />
+            <ToolsSection />
             <ContactSection />
             <Footer />
           </main>

@@ -10,10 +10,12 @@ const es = {
     about: "Sobre mí",
     experience: "Experiencia",
     services: "Servicios",
-    portfolio: "Portafolio",
+    portfolio: "Proyectos",
+    tools: "Herramientas",
     contact: "Contacto",
   },
   navMobileTag: "CRAFTED CODE HUB · MANAGUA NI",
+  waMessage: "Hola Gustavo, vi tu portafolio y me gustaría contratar tus servicios.",
   hero: {
     label: "Frontend Developer — Co-fundador Crafted Code Hub — Managua, NI",
     descr:
@@ -30,7 +32,7 @@ const es = {
     ],
   },
   about: {
-    index: "002 / 006 — SOBRE MÍ",
+    index: "002 / 007 — SOBRE MÍ",
     heading: "Un developer que también piensa en diseño.",
     p1before: "Soy Gustavo Mejia, Frontend Developer y co-fundador de ",
     p1link: "Crafted Code Hub",
@@ -43,12 +45,12 @@ const es = {
       ", donde presenté sobre performance web avanzada y arquitectura WordPress headless.",
     photoCaption: "WORDCAMP SAN JOSÉ 2025",
     badge: "6 AÑOS · CCH",
-    tableHeader: "STACK / NIVEL / DESDE",
+    tableHeader: "STACK / NIVEL",
     since: "DESDE",
     levels: { Expert: "Experto", Advanced: "Avanzado", Proficient: "Competente" } as Record<string, string>,
   },
   experience: {
-    index: "003 / 006 — EXPERIENCIA",
+    index: "003 / 007 — EXPERIENCIA",
     heading: "Dónde he construido.",
     roles: [
       {
@@ -86,12 +88,12 @@ const es = {
     ],
   },
   services: {
-    index: "004 / 006 — SERVICIOS",
+    index: "004 / 007 — SERVICIOS",
     heading: "Lo que construyo.",
     items: [
       {
         title: "Web Development",
-        subtitle: "Next.js · React · TypeScript",
+        subtitle: "Next.js · Astro · Vue.js",
         description:
           "Aplicaciones web de alto rendimiento construidas con tecnologías modernas. Desde landing pages hasta plataformas complejas — arquitectura limpia, código mantenible, resultados medibles.",
       },
@@ -109,7 +111,7 @@ const es = {
       },
       {
         title: "Performance & Animation",
-        subtitle: "GSAP · Framer Motion · Lenis",
+        subtitle: "Lenis · Core Web Vitals · Sass",
         description:
           "Animaciones que complementan la experiencia, no la interrumpen. Optimización de Core Web Vitals, scroll fluido y micro-interacciones que distinguen un sitio del resto.",
       },
@@ -122,31 +124,45 @@ const es = {
     ],
   },
   portfolio: {
-    index: "005 / 006 — PORTAFOLIO",
-    heading: "Trabajo selecto.",
-    filters: [
-      { value: "all", label: "Todos" },
-      { value: "site", label: "Sitios" },
-      { value: "tool", label: "Herramientas" },
-    ],
+    index: "005 / 007 — PROYECTOS",
+    heading: "Proyectos selectos.",
     viewSite: "Ver sitio ↗",
     projects: [
       { client: "Plataforma · Talento", description: "Conecta talento latinoamericano con empresas remotas de todo el mundo." },
       { client: "E-commerce · Food", description: "E-commerce y experiencia de marca para empresa artesanal de alimentos en EE.UU." },
       { client: "Corporativo", description: "Sitio corporativo con interacciones modernas y animaciones de alto impacto." },
-      { client: "Marca · Food", description: "Identidad digital y experiencia de pedido para marca de alimentos en LatAm." },
+      // Temporalmente oculto (Chile Perro Bravo): { client: "Marca · Food", description: "Identidad digital y experiencia de pedido para marca de alimentos en LatAm." },
       { client: "Construcción · Utah", description: "Presencia digital de alto impacto para empresa constructora en Utah, EE.UU." },
-      { client: "SaaS · Lead Generation", description: "Extrae datos de negocios desde Google Maps para acelerar prospección comercial. Sin ir card por card." },
-      { client: "Dev Tool · Utilidad", description: "Convierte imágenes PNG y JPG a WebP optimizado. Drag & drop, procesamiento instantáneo." },
+    ],
+  },
+  tools: {
+    index: "006 / 007 — HERRAMIENTAS",
+    heading: "Herramientas que he construido.",
+    subheading:
+      "Productos propios que diseño, desarrollo y mantengo — no encargos de clientes. Software real que resuelve problemas reales y genera valor a escala.",
+    viewTool: "Probar herramienta ↗",
+    items: [
+      {
+        client: "SaaS · Lead Generation",
+        description:
+          "Extrae datos de negocios desde Google Maps para acelerar la prospección comercial. Olvídate de ir card por card — exporta cientos de leads en minutos.",
+      },
+      {
+        client: "Dev Tool · Utilidad",
+        description:
+          "Convierte imágenes PNG y JPG a WebP optimizado. Drag & drop, procesamiento instantáneo en el navegador y descarga por lotes.",
+      },
     ],
   },
   contact: {
-    index: "006 / 006 — CONTACTO",
+    index: "007 / 007 — CONTACTO",
     heading: "¿Tienes un proyecto?",
     copyIdle: "→ Click para copiar",
     copyDone: "✓ Copiado al portapapeles",
     socials: "REDES",
     copyAria: "Copiar email",
+    waCta: "Escríbeme por WhatsApp",
+    waHint: "Respuesta rápida — normalmente en menos de 24h",
     form: {
       name: "NOMBRE",
       email: "EMAIL",
@@ -194,10 +210,12 @@ const en: typeof es = {
     about: "About",
     experience: "Experience",
     services: "Services",
-    portfolio: "Portfolio",
+    portfolio: "Projects",
+    tools: "Tools",
     contact: "Contact",
   },
   navMobileTag: "CRAFTED CODE HUB · MANAGUA NI",
+  waMessage: "Hi Gustavo, I saw your portfolio and I'd like to hire your services.",
   hero: {
     label: "Frontend Developer — Crafted Code Hub Co-founder — Managua, NI",
     descr:
@@ -214,7 +232,7 @@ const en: typeof es = {
     ],
   },
   about: {
-    index: "002 / 006 — ABOUT",
+    index: "002 / 007 — ABOUT",
     heading: "A developer who also thinks in design.",
     p1before: "I'm Gustavo Mejia, Frontend Developer and co-founder of ",
     p1link: "Crafted Code Hub",
@@ -227,12 +245,12 @@ const en: typeof es = {
       ", where I spoke about advanced web performance and headless WordPress architecture.",
     photoCaption: "WORDCAMP SAN JOSÉ 2025",
     badge: "6 YRS · CCH",
-    tableHeader: "STACK / LEVEL / SINCE",
+    tableHeader: "STACK / LEVEL",
     since: "SINCE",
     levels: { Expert: "Expert", Advanced: "Advanced", Proficient: "Proficient" },
   },
   experience: {
-    index: "003 / 006 — EXPERIENCE",
+    index: "003 / 007 — EXPERIENCE",
     heading: "Where I've built.",
     roles: [
       {
@@ -270,12 +288,12 @@ const en: typeof es = {
     ],
   },
   services: {
-    index: "004 / 006 — SERVICES",
+    index: "004 / 007 — SERVICES",
     heading: "What I build.",
     items: [
       {
         title: "Web Development",
-        subtitle: "Next.js · React · TypeScript",
+        subtitle: "Next.js · Astro · Vue.js",
         description:
           "High-performance web applications built with modern technologies. From landing pages to complex platforms — clean architecture, maintainable code, measurable results.",
       },
@@ -293,7 +311,7 @@ const en: typeof es = {
       },
       {
         title: "Performance & Animation",
-        subtitle: "GSAP · Framer Motion · Lenis",
+        subtitle: "Lenis · Core Web Vitals · Sass",
         description:
           "Animations that complement the experience instead of interrupting it. Core Web Vitals optimization, smooth scrolling and micro-interactions that set a site apart.",
       },
@@ -306,31 +324,45 @@ const en: typeof es = {
     ],
   },
   portfolio: {
-    index: "005 / 006 — PORTFOLIO",
-    heading: "Selected work.",
-    filters: [
-      { value: "all", label: "All" },
-      { value: "site", label: "Sites" },
-      { value: "tool", label: "Tools" },
-    ],
+    index: "005 / 007 — PROJECTS",
+    heading: "Selected projects.",
     viewSite: "View site ↗",
     projects: [
       { client: "Platform · Talent", description: "Connects Latin American talent with remote companies around the world." },
       { client: "E-commerce · Food", description: "E-commerce and brand experience for an artisan food company in the U.S." },
       { client: "Corporate", description: "Corporate site with modern interactions and high-impact animations." },
-      { client: "Brand · Food", description: "Digital identity and ordering experience for a food brand in LatAm." },
+      // Temporarily hidden (Chile Perro Bravo): { client: "Brand · Food", description: "Digital identity and ordering experience for a food brand in LatAm." },
       { client: "Construction · Utah", description: "High-impact digital presence for a construction company in Utah, USA." },
-      { client: "SaaS · Lead Generation", description: "Extracts business data from Google Maps to speed up sales prospecting. No going card by card." },
-      { client: "Dev Tool · Utility", description: "Convert PNG and JPG images to optimized WebP. Drag & drop, instant processing." },
+    ],
+  },
+  tools: {
+    index: "006 / 007 — TOOLS",
+    heading: "Tools I've built.",
+    subheading:
+      "My own products — designed, built and maintained by me, not client work. Real software that solves real problems and generates value at scale.",
+    viewTool: "Try the tool ↗",
+    items: [
+      {
+        client: "SaaS · Lead Generation",
+        description:
+          "Extracts business data from Google Maps to speed up sales prospecting. Forget going card by card — export hundreds of leads in minutes.",
+      },
+      {
+        client: "Dev Tool · Utility",
+        description:
+          "Convert PNG and JPG images to optimized WebP. Drag & drop, instant in-browser processing and batch download.",
+      },
     ],
   },
   contact: {
-    index: "006 / 006 — CONTACT",
+    index: "007 / 007 — CONTACT",
     heading: "Got a project?",
     copyIdle: "→ Click to copy",
     copyDone: "✓ Copied to clipboard",
     socials: "SOCIALS",
     copyAria: "Copy email",
+    waCta: "Message me on WhatsApp",
+    waHint: "Quick reply — usually within 24h",
     form: {
       name: "NAME",
       email: "EMAIL",

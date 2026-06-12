@@ -1,20 +1,20 @@
 "use client";
 
-import { useRef, useState, useCallback } from "react";
+import { useRef, useState } from "react";
 import { motion, AnimatePresence, useInView } from "framer-motion";
-import Image from "next/image";
 import type { IconType } from "react-icons";
 import ScrambleText from "@/components/ScrambleText";
 import { useLang } from "@/lib/i18n";
 import {
-  SiReact,
+  SiVuedotjs,
   SiNextdotjs,
-  SiTypescript,
+  SiAstro,
+  SiSass,
   SiTailwindcss,
   SiWordpress,
   SiWoocommerce,
-  SiFramer,
-  SiGreensock,
+  SiLaravel,
+  SiPhp,
   SiSupabase,
   SiPostgresql,
   SiOpenai,
@@ -36,6 +36,22 @@ const SiCursor: IconType = ({ size = "1em", color = "currentColor", title, ...pr
   </svg>
 );
 
+const SiAcf: IconType = ({ size = "1em", color = "currentColor", title, ...props }) => (
+  <svg
+    width={size}
+    height={size}
+    viewBox="0 0 24 24"
+    xmlns="http://www.w3.org/2000/svg"
+    {...props}
+  >
+    {title ? <title>{title}</title> : null}
+    <rect x="1" y="4" width="22" height="16" rx="3" fill="none" stroke={color} strokeWidth="1.6" />
+    <text x="12" y="15.6" textAnchor="middle" fontFamily="monospace" fontSize="7.2" fontWeight="700" fill={color}>
+      ACF
+    </text>
+  </svg>
+);
+
 type Skill = {
   name: string;
   level: string;
@@ -47,12 +63,12 @@ type Skill = {
 };
 
 const skills: Skill[] = [
-  { name: "Next.js / React", level: "Expert", year: "2021", color: "#E2E8F0", bg: "#0E1117", desc: "App Router · Server Components · RSC", icons: [SiNextdotjs, SiReact] },
-  { name: "TypeScript", level: "Expert", year: "2021", color: "#3178C6", bg: "#0B1726", desc: "Strict mode · Generics · Utility types", icons: [SiTypescript] },
-  { name: "Tailwind CSS", level: "Expert", year: "2021", color: "#38BDF8", bg: "#061726", desc: "Utility-first · Design systems · JIT", icons: [SiTailwindcss] },
-  { name: "WordPress / WooCommerce", level: "Expert", year: "2018", color: "#21759B", bg: "#071520", desc: "Custom themes · ACF Pro · REST API", icons: [SiWordpress, SiWoocommerce] },
-  { name: "Framer Motion", level: "Advanced", year: "2022", color: "#C8FF00", bg: "#0D1409", desc: "Variants · AnimatePresence · Gestures", icons: [SiFramer] },
-  { name: "GSAP / ScrollTrigger", level: "Advanced", year: "2022", color: "#88CE02", bg: "#0C1506", desc: "ScrollTrigger · SplitText · Timelines", icons: [SiGreensock] },
+  { name: "WordPress / WooCommerce", level: "Expert", year: "2018", color: "#21759B", bg: "#071520", desc: "Custom themes · WooCommerce · REST API", icons: [SiWordpress, SiWoocommerce] },
+  { name: "ACF Pro", level: "Expert", year: "2019", color: "#00D3AE", bg: "#04130F", desc: "Flexible content · Custom fields · Blocks", icons: [SiAcf] },
+  { name: "Next.js / Astro", level: "Expert", year: "2021", color: "#E2E8F0", bg: "#0E1117", desc: "App Router · Server Components · SSG", icons: [SiNextdotjs, SiAstro] },
+  { name: "Vue.js", level: "Advanced", year: "2022", color: "#42B883", bg: "#06150F", desc: "Composition API · SFC · Pinia", icons: [SiVuedotjs] },
+  { name: "Laravel / PHP", level: "Advanced", year: "2019", color: "#FF2D20", bg: "#1A0706", desc: "Eloquent · Blade · REST APIs", icons: [SiLaravel, SiPhp] },
+  { name: "Sass / Tailwind CSS", level: "Expert", year: "2018", color: "#38BDF8", bg: "#061726", desc: "BEM · Utility-first · Design systems", icons: [SiSass, SiTailwindcss] },
   { name: "Supabase / PostgreSQL", level: "Advanced", year: "2023", color: "#3ECF8E", bg: "#061A11", desc: "Auth · Realtime · Row-level security", icons: [SiSupabase, SiPostgresql] },
   { name: "AI-Powered Workflows", level: "Advanced", year: "2024", color: "#C8FF00", bg: "#0D1409", desc: "Cursor · Claude · OpenAI · Automation", icons: [SiCursor, SiClaude, SiOpenai] },
   { name: "Figma / UI Design", level: "Proficient", year: "2020", color: "#A259FF", bg: "#110B1A", desc: "Components · Auto-layout · Prototypes", icons: [SiFigma] },
@@ -74,7 +90,7 @@ function TechVisual({ skill }: { skill: Skill | null }) {
         >
           {/* Top label */}
           <span style={{ fontFamily: "var(--font-mono)", color: skill.color, fontSize: "0.58rem", letterSpacing: "0.2em", opacity: 0.7 }}>
-            {(t.about.levels[skill.level] ?? skill.level).toUpperCase()} · {t.about.since} {skill.year}
+            {(t.about.levels[skill.level] ?? skill.level).toUpperCase()} · {skill.year}
           </span>
 
           {/* Brand logos */}
@@ -141,9 +157,6 @@ function SkillRow({
         <span style={{ fontFamily: "var(--font-mono)", color: "var(--color-accent)", fontSize: "0.68rem", letterSpacing: "0.1em" }}>
           <ScrambleText text={t.about.levels[skill.level] ?? skill.level} />
         </span>
-        <span style={{ fontFamily: "var(--font-mono)", color: "var(--color-text-secondary)", fontSize: "0.68rem", letterSpacing: "0.1em" }}>
-          {skill.year}
-        </span>
       </div>
     </motion.div>
   );
@@ -154,22 +167,7 @@ export default function AboutSection() {
   const ref = useRef(null);
   const inView = useInView(ref, { once: true, margin: "-100px" });
 
-  const [photoVisible, setPhotoVisible] = useState(false);
-  const [showDots, setShowDots] = useState(true);
-  const exitTimer = useRef<ReturnType<typeof setTimeout>>();
-
   const [hoveredSkill, setHoveredSkill] = useState<Skill | null>(null);
-
-  const handleWordcampEnter = useCallback(() => {
-    clearTimeout(exitTimer.current);
-    setPhotoVisible(true);
-    setShowDots(false);
-  }, []);
-
-  const handleWordcampLeave = useCallback(() => {
-    setPhotoVisible(false);
-    exitTimer.current = setTimeout(() => setShowDots(true), 1000);
-  }, []);
 
   return (
     <section id="about" className="relative md:min-h-screen max-w-[1600px] mx-auto px-6 md:pl-40 md:pr-16 py-20 md:py-32 overflow-hidden">
@@ -228,90 +226,44 @@ export default function AboutSection() {
             </p>
             <p>
               <ScrambleText text={t.about.p3before} />
-              <strong
-                onMouseEnter={handleWordcampEnter}
-                onMouseLeave={handleWordcampLeave}
-                style={{
-                  color: "var(--color-primary)",
-                  cursor: "default",
-                  borderBottom: "1px dashed var(--color-accent)",
-                  paddingBottom: "1px",
-                }}
+              <a
+                href="https://sanjose.wordcamp.org/2025/speaker/gustavo-adolfo-mejia-fuentes/"
+                target="_blank"
+                rel="noopener noreferrer"
+                style={{ color: "var(--color-primary)", fontWeight: 700, textDecoration: "none", borderBottom: "1px solid var(--color-muted)", transition: "border-color 0.2s" }}
+                data-cursor-hover
               >
                 <ScrambleText text={t.about.p3strong} />
-              </strong>
+              </a>
               <ScrambleText text={t.about.p3after} />
             </p>
           </motion.div>
         </div>
 
-        {/* Right: dot grid / wordcamp photo */}
+        {/* Right: dot grid */}
         <div className="hidden lg:flex items-center justify-center">
           <div className="relative w-full aspect-square max-w-[340px]">
-            <AnimatePresence>
-              {showDots && (
+            <div
+              className="absolute inset-0 grid"
+              style={{ gridTemplateColumns: "repeat(14, 1fr)", gridTemplateRows: "repeat(14, 1fr)", gap: "3px", padding: "3px" }}
+            >
+              {Array.from({ length: 196 }).map((_, i) => (
                 <motion.div
-                  key="dots"
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  exit={{ opacity: 0 }}
-                  transition={{ duration: 0.6 }}
-                  className="absolute inset-0 grid"
-                  style={{ gridTemplateColumns: "repeat(14, 1fr)", gridTemplateRows: "repeat(14, 1fr)", gap: "3px", padding: "3px" }}
-                >
-                  {Array.from({ length: 196 }).map((_, i) => (
-                    <motion.div
-                      key={i}
-                      className="rounded-full"
-                      style={{ backgroundColor: i % 17 === 0 ? "var(--color-accent)" : "var(--color-border)" }}
-                      animate={{ opacity: [0.2, i % 7 === 0 ? 0.9 : 0.5, 0.2] }}
-                      transition={{ duration: Math.random() * 3 + 2, repeat: Infinity, delay: Math.random() * 2, ease: "easeInOut" }}
-                    />
-                  ))}
-                </motion.div>
-              )}
-            </AnimatePresence>
+                  key={i}
+                  className="rounded-full"
+                  style={{ backgroundColor: i % 17 === 0 ? "var(--color-accent)" : "var(--color-border)" }}
+                  animate={{ opacity: [0.2, i % 7 === 0 ? 0.9 : 0.5, 0.2] }}
+                  transition={{ duration: Math.random() * 3 + 2, repeat: Infinity, delay: Math.random() * 2, ease: "easeInOut" }}
+                />
+              ))}
+            </div>
 
-            <AnimatePresence>
-              {photoVisible && (
-                <motion.div
-                  key="photo"
-                  initial={{ opacity: 0, scale: 0.96 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  exit={{ opacity: 0, scale: 0.96 }}
-                  transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
-                  className="absolute inset-0 overflow-hidden"
-                >
-                  <Image
-                    src="/wordcamp.webp"
-                    alt="Gustavo Mejia en WordCamp San José 2025"
-                    fill
-                    className="object-cover"
-                    sizes="340px"
-                    onError={() => {}}
-                  />
-                  <div
-                    className="absolute inset-0"
-                    style={{ background: "linear-gradient(to top, rgba(8,8,8,0.7) 0%, transparent 50%)" }}
-                  />
-                  <span
-                    className="absolute bottom-3 left-3"
-                    style={{ fontFamily: "var(--font-mono)", color: "var(--color-accent)", fontSize: "0.6rem", letterSpacing: "0.15em" }}
-                  >
-                    {t.about.photoCaption}
-                  </span>
-                </motion.div>
-              )}
-            </AnimatePresence>
-
-            {showDots && !photoVisible && (
-              <div
-                className="absolute bottom-3 left-3"
-                style={{ fontFamily: "var(--font-mono)", color: "var(--color-accent)", fontSize: "0.65rem", letterSpacing: "0.15em" }}
-              >
-                <ScrambleText text={t.about.badge} />
-              </div>
-            )}
+            <div
+              className="absolute bottom-3 left-3"
+              style={{ fontFamily: "var(--font-mono)", color: "var(--color-accent)", fontSize: "0.65rem", letterSpacing: "0.15em" }}
+            >
+              <ScrambleText text={t.about.badge} />
+            </div>
           </div>
         </div>
       </div>

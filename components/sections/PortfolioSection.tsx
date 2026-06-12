@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useRef, forwardRef } from "react";
+import { useState, useRef } from "react";
 import { motion, AnimatePresence, useInView } from "framer-motion";
 import ScrambleText from "@/components/ScrambleText";
 import { useLang } from "@/lib/i18n";
@@ -11,20 +11,17 @@ type Project = {
   url: string;
   client: string;
   year: string;
-  category: string;
   tags: string[];
   description: string;
   size: string;
 };
 
 const projectMeta = [
-  { id: 1, name: "Remote Talent LatAm", url: "https://remotetalentlatam.com/", year: "2024", category: "site", tags: ["Next.js", "Supabase", "Tailwind"], size: "large" },
-  { id: 2, name: "Finger Foods Farm", url: "https://www.fingerfoodsfarm.com/", year: "2024", category: "site", tags: ["WordPress", "WooCommerce", "GSAP"], size: "small" },
-  { id: 3, name: "CrossGo", url: "https://www.crossgo.com/", year: "2023", category: "site", tags: ["Next.js", "TypeScript", "Framer Motion"], size: "medium" },
-  { id: 4, name: "Chile Perro Bravo", url: "https://chile-perro-bravo.vercel.app/", year: "2024", category: "site", tags: ["Next.js", "Framer Motion", "Tailwind"], size: "small" },
-  { id: 5, name: "Momentum Construction", url: "https://momentumconstructionutah.com/", year: "2023", category: "site", tags: ["WordPress", "Elementor Pro", "GSAP"], size: "medium" },
-  { id: 6, name: "Business Scrapper", url: "https://business-scrapper-nine.vercel.app/", year: "2024", category: "tool", tags: ["Next.js", "TypeScript", "Playwright"], size: "large" },
-  { id: 7, name: "Webplify", url: "https://webplify.vercel.app/", year: "2024", category: "tool", tags: ["Next.js", "TypeScript", "Sharp"], size: "medium" },
+  { id: 1, name: "Remote Talent LatAm", url: "https://remotetalentlatam.com/", year: "2024", tags: ["Next.js", "Supabase", "Tailwind"], size: "large" },
+  { id: 2, name: "Finger Foods Farm", url: "https://www.fingerfoodsfarm.com/", year: "2024", tags: ["WordPress", "WooCommerce", "Sass"], size: "small" },
+  { id: 3, name: "CrossGo", url: "https://www.crossgo.com/", year: "2023", tags: ["Next.js", "Vue.js", "Astro"], size: "medium" },
+  // Temporalmente oculto: { id: 4, name: "Chile Perro Bravo", url: "https://chile-perro-bravo.vercel.app/", year: "2024", tags: ["Next.js", "Tailwind", "Sass"], size: "small" },
+  { id: 5, name: "Momentum Construction", url: "https://momentumconstructionutah.com/", year: "2023", tags: ["WordPress", "ACF Pro", "Sass"], size: "medium" },
 ];
 
 const sizeSpan: Record<string, string> = {
@@ -39,28 +36,25 @@ const sizeHeight: Record<string, string> = {
   small: "260px",
 };
 
-const ProjectCard = forwardRef<HTMLElement, { project: Project }>(function ProjectCard({ project }, forwardedRef) {
+function ProjectCard({ project, index }: { project: Project; index: number }) {
   const { t } = useLang();
   const [hovered, setHovered] = useState(false);
   const ref = useRef<HTMLElement | null>(null);
   const inView = useInView(ref, { once: true, margin: "-40px" });
 
-  const setRefs = (node: HTMLElement | null) => {
-    ref.current = node;
-    if (typeof forwardedRef === "function") forwardedRef(node);
-    else if (forwardedRef) forwardedRef.current = node;
-  };
-
   return (
-    <motion.article
-      ref={setRefs}
+    <motion.a
+      ref={ref as React.RefObject<HTMLAnchorElement>}
+      href={project.url}
+      target="_blank"
+      rel="noopener noreferrer"
       initial={{ opacity: 0, y: 28 }}
       animate={inView ? { opacity: 1, y: 0 } : {}}
       whileHover={{ y: -6, transition: { duration: 0.3, ease: [0.22, 1, 0.36, 1] } }}
-      transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1] as [number, number, number, number] }}
+      transition={{ delay: index * 0.06, duration: 0.55, ease: [0.22, 1, 0.36, 1] as [number, number, number, number] }}
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
-      className={`relative overflow-hidden ${sizeSpan[project.size]}`}
+      className={`relative overflow-hidden block ${sizeSpan[project.size]}`}
       style={{
         backgroundColor: hovered ? "#141413" : "var(--color-bg-secondary)",
         border: "1px solid",
@@ -68,7 +62,7 @@ const ProjectCard = forwardRef<HTMLElement, { project: Project }>(function Proje
         transition: "background-color 0.3s ease, border-color 0.3s ease",
         minHeight: sizeHeight[project.size],
         padding: "1.75rem",
-        cursor: "pointer",
+        textDecoration: "none",
       }}
       data-cursor-hover
     >
@@ -86,22 +80,6 @@ const ProjectCard = forwardRef<HTMLElement, { project: Project }>(function Proje
       >
         {String(project.id).padStart(2, "0")}
       </span>
-
-      {project.category === "tool" && (
-        <span
-          className="absolute top-4 right-4"
-          style={{
-            fontFamily: "var(--font-mono)",
-            color: "var(--color-accent)",
-            fontSize: "0.58rem",
-            letterSpacing: "0.15em",
-            border: "1px solid var(--color-accent)",
-            padding: "2px 6px",
-          }}
-        >
-          TOOL
-        </span>
-      )}
 
       <div className="relative z-10 h-full flex flex-col justify-between">
         <div>
@@ -149,32 +127,25 @@ const ProjectCard = forwardRef<HTMLElement, { project: Project }>(function Proje
             )}
           </AnimatePresence>
 
-          <a
-            href={project.url}
-            target="_blank"
-            rel="noopener noreferrer"
+          <span
             className="ml-auto flex-shrink-0"
-            style={{ fontFamily: "var(--font-mono)", color: hovered ? "var(--color-accent)" : "var(--color-muted)", fontSize: "0.68rem", letterSpacing: "0.12em", textDecoration: "none", transition: "color 0.2s", whiteSpace: "nowrap" }}
-            data-cursor-hover
+            style={{ fontFamily: "var(--font-mono)", color: hovered ? "var(--color-accent)" : "var(--color-muted)", fontSize: "0.68rem", letterSpacing: "0.12em", transition: "color 0.2s", whiteSpace: "nowrap" }}
           >
             <ScrambleText text={t.portfolio.viewSite} />
-          </a>
+          </span>
         </div>
       </div>
-    </motion.article>
+    </motion.a>
   );
-});
+}
 
 export default function PortfolioSection() {
   const { t } = useLang();
-  const [activeFilter, setActiveFilter] = useState("all");
   const projects: Project[] = projectMeta.map((p, i) => ({
     ...p,
     client: t.portfolio.projects[i].client,
     description: t.portfolio.projects[i].description,
   }));
-  const filters = t.portfolio.filters;
-  const filtered = activeFilter === "all" ? projects : projects.filter((p) => p.category === activeFilter);
 
   return (
     <section id="portfolio" className="md:min-h-screen max-w-[1600px] mx-auto px-6 md:pl-40 md:pr-16 py-20 md:py-32">
@@ -187,7 +158,7 @@ export default function PortfolioSection() {
         <ScrambleText text={t.portfolio.index} />
       </motion.p>
 
-      <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-10">
+      <div className="mb-10">
         <motion.h2
           initial={{ opacity: 0, y: 36 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -197,45 +168,13 @@ export default function PortfolioSection() {
         >
           <ScrambleText text={t.portfolio.heading} />
         </motion.h2>
-
-        <motion.div initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }} transition={{ delay: 0.2 }} className="flex gap-8">
-          {filters.map((f) => (
-            <button
-              key={f.value}
-              onClick={() => setActiveFilter(f.value)}
-              className="relative pb-1"
-              style={{
-                fontFamily: "var(--font-mono)",
-                color: activeFilter === f.value ? "var(--color-accent)" : "var(--color-text-secondary)",
-                fontSize: "0.72rem",
-                letterSpacing: "0.12em",
-                background: "none",
-                border: "none",
-                cursor: "pointer",
-                transition: "color 0.2s",
-              }}
-              data-cursor-hover
-            >
-              <ScrambleText text={f.label} />
-              {activeFilter === f.value && (
-                <motion.span
-                  layoutId="filter-line"
-                  className="absolute -bottom-0 left-0 right-0"
-                  style={{ height: "1px", backgroundColor: "var(--color-accent)", display: "block" }}
-                />
-              )}
-            </button>
-          ))}
-        </motion.div>
       </div>
 
-      <motion.div layout className="grid grid-cols-1 md:grid-cols-3 gap-3" style={{ gridAutoFlow: "dense" }}>
-        <AnimatePresence mode="popLayout">
-          {filtered.map((p) => (
-            <ProjectCard key={p.id} project={p} />
-          ))}
-        </AnimatePresence>
-      </motion.div>
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-3" style={{ gridAutoFlow: "dense" }}>
+        {projects.map((p, i) => (
+          <ProjectCard key={p.id} project={p} index={i} />
+        ))}
+      </div>
     </section>
   );
 }

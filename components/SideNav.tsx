@@ -7,7 +7,7 @@ import { useLang } from "@/lib/i18n";
 import ScrambleText from "@/components/ScrambleText";
 import LanguageSwitcher from "@/components/LanguageSwitcher";
 
-type NavId = "home" | "about" | "experience" | "services" | "portfolio" | "contact";
+type NavId = "home" | "about" | "experience" | "services" | "portfolio" | "tools" | "contact";
 
 const links: { href: string; id: NavId }[] = [
   { href: "#home", id: "home" },
@@ -15,6 +15,7 @@ const links: { href: string; id: NavId }[] = [
   { href: "#experience", id: "experience" },
   { href: "#services", id: "services" },
   { href: "#portfolio", id: "portfolio" },
+  { href: "#tools", id: "tools" },
   { href: "#contact", id: "contact" },
 ];
 

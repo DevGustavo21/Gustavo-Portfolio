@@ -6,11 +6,12 @@ import { useLang } from "@/lib/i18n";
 
 const EMAIL = "gustavomejiafuentes2111@gmail.com";
 
-const footerNav: { id: "home" | "about" | "services" | "portfolio" | "contact"; href: string }[] = [
+const footerNav: { id: "home" | "about" | "services" | "portfolio" | "tools" | "contact"; href: string }[] = [
   { id: "home", href: "#home" },
   { id: "about", href: "#about" },
   { id: "services", href: "#services" },
   { id: "portfolio", href: "#portfolio" },
+  { id: "tools", href: "#tools" },
   { id: "contact", href: "#contact" },
 ];
 

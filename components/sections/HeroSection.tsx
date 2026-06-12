@@ -5,6 +5,7 @@ import { motion } from "framer-motion";
 import ThreeBackground from "@/components/ThreeBackground";
 import ScrambleText from "@/components/ScrambleText";
 import { useLang } from "@/lib/i18n";
+import { whatsappUrl } from "@/lib/whatsapp";
 
 const containerVariants = {
   hidden: {},
@@ -149,9 +150,11 @@ export default function HeroSection() {
                 </motion.span>
               </a>
 
-              {/* Hablemos — active (green+arrow) when hovered */}
+              {/* Hablemos — opens WhatsApp with a prefilled, localized message */}
               <a
-                href="#contact"
+                href={whatsappUrl(t.waMessage)}
+                target="_blank"
+                rel="noopener noreferrer"
                 className="inline-flex items-center gap-3 transition-colors duration-200"
                 data-cursor-hover
                 onMouseEnter={() => setHablemosHovered(true)}
@@ -230,7 +233,7 @@ export default function HeroSection() {
         className="relative z-[2] flex items-center gap-4"
       >
         <span style={{ fontFamily: "var(--font-mono)", color: "var(--color-muted)", fontSize: "0.7rem", letterSpacing: "0.15em" }}>
-          001 / 006
+          001 / 007
         </span>
         <div style={{ height: "1px", width: "60px", backgroundColor: "var(--color-muted)" }} />
         <span style={{ fontFamily: "var(--font-mono)", color: "var(--color-muted)", fontSize: "0.7rem", letterSpacing: "0.15em" }}>
