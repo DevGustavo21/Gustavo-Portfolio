@@ -16,8 +16,8 @@ type Tool = {
 };
 
 const toolMeta = [
-  { id: 1, name: "Business Scrapper", url: "https://business-scrapper-nine.vercel.app/", year: "2024", tags: ["Next.js", "Playwright", "Node.js"] },
-  { id: 2, name: "Webplify", url: "https://webplify.vercel.app/", year: "2024", tags: ["Next.js", "Sharp", "WebAssembly"] },
+  { id: 1, name: "Business Scrapper", url: "https://business-scrapper-nine.vercel.app/", year: "2026", tags: ["Next.js", "Playwright", "Node.js"] },
+  { id: 2, name: "Webplify", url: "https://webplify.vercel.app/", year: "2026", tags: ["Next.js", "Sharp", "WebAssembly"] },
 ];
 
 function ToolCard({ tool, index }: { tool: Tool; index: number }) {

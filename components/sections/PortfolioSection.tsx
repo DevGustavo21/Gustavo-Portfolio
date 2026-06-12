@@ -18,11 +18,11 @@ type Project = {
 };
 
 const projectMeta = [
-  { id: 1, name: "Remote Talent LatAm", url: "https://remotetalentlatam.com/", year: "2024", tags: ["WordPress", "ACF Pro", "Sass"], size: "large" },
+  { id: 1, name: "Remote Talent LatAm", url: "https://remotetalentlatam.com/", year: "2026", tags: ["WordPress", "ACF Pro", "Sass"], size: "large" },
   { id: 2, name: "Finger Foods Farm", url: "https://www.fingerfoodsfarm.com/", year: "2024", tags: ["WordPress", "Elementor"], size: "small" },
-  { id: 3, name: "CrossGo", url: "https://www.crossgo.com/", year: "2023", tags: ["WordPress", "Elementor"], size: "medium" },
+  { id: 3, name: "CrossGo", url: "https://www.crossgo.com/", year: "2026", tags: ["WordPress", "Elementor"], size: "medium" },
   // Temporalmente oculto: { id: 4, name: "Chile Perro Bravo", url: "https://chile-perro-bravo.vercel.app/", year: "2024", tags: ["Next.js", "Tailwind", "Sass"], size: "small" },
-  { id: 5, name: "Momentum Construction", url: "https://momentumconstructionutah.com/", year: "2023", tags: ["WordPress", "ACF Pro", "Sass"], size: "medium" },
+  { id: 5, name: "Momentum Construction", url: "https://momentumconstructionutah.com/", year: "2025", tags: ["WordPress", "ACF Pro", "Sass"], size: "medium" },
 ];
 
 const sizeSpan: Record<string, string> = {
