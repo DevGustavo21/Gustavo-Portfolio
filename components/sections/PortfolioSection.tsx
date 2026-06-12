@@ -4,6 +4,7 @@ import { useState, useRef } from "react";
 import { motion, AnimatePresence, useInView } from "framer-motion";
 import ScrambleText from "@/components/ScrambleText";
 import { useLang } from "@/lib/i18n";
+import { whatsappUrl } from "@/lib/whatsapp";
 
 type Project = {
   id: number;
@@ -17,9 +18,9 @@ type Project = {
 };
 
 const projectMeta = [
-  { id: 1, name: "Remote Talent LatAm", url: "https://remotetalentlatam.com/", year: "2024", tags: ["Next.js", "Supabase", "Tailwind"], size: "large" },
-  { id: 2, name: "Finger Foods Farm", url: "https://www.fingerfoodsfarm.com/", year: "2024", tags: ["WordPress", "WooCommerce", "Sass"], size: "small" },
-  { id: 3, name: "CrossGo", url: "https://www.crossgo.com/", year: "2023", tags: ["Next.js", "Vue.js", "Astro"], size: "medium" },
+  { id: 1, name: "Remote Talent LatAm", url: "https://remotetalentlatam.com/", year: "2024", tags: ["WordPress", "ACF Pro", "Sass"], size: "large" },
+  { id: 2, name: "Finger Foods Farm", url: "https://www.fingerfoodsfarm.com/", year: "2024", tags: ["WordPress", "Elementor"], size: "small" },
+  { id: 3, name: "CrossGo", url: "https://www.crossgo.com/", year: "2023", tags: ["WordPress", "Elementor"], size: "medium" },
   // Temporalmente oculto: { id: 4, name: "Chile Perro Bravo", url: "https://chile-perro-bravo.vercel.app/", year: "2024", tags: ["Next.js", "Tailwind", "Sass"], size: "small" },
   { id: 5, name: "Momentum Construction", url: "https://momentumconstructionutah.com/", year: "2023", tags: ["WordPress", "ACF Pro", "Sass"], size: "medium" },
 ];
@@ -139,6 +140,105 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
   );
 }
 
+function PrivateBox({ index }: { index: number }) {
+  const { t } = useLang();
+  const [hovered, setHovered] = useState(false);
+  const ref = useRef<HTMLAnchorElement | null>(null);
+  const inView = useInView(ref, { once: true, margin: "-40px" });
+
+  return (
+    <motion.a
+      ref={ref}
+      href={whatsappUrl(t.portfolio.privateWaMessage)}
+      target="_blank"
+      rel="noopener noreferrer"
+      initial={{ opacity: 0, y: 28 }}
+      animate={inView ? { opacity: 1, y: 0 } : {}}
+      whileHover={{ y: -6, transition: { duration: 0.3, ease: [0.22, 1, 0.36, 1] } }}
+      transition={{ delay: index * 0.06, duration: 0.55, ease: [0.22, 1, 0.36, 1] as [number, number, number, number] }}
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}
+      className="relative overflow-hidden block md:col-span-1"
+      style={{
+        backgroundColor: hovered ? "#141413" : "transparent",
+        border: "1px dashed",
+        borderColor: hovered ? "var(--color-accent)" : "var(--color-border)",
+        transition: "background-color 0.3s ease, border-color 0.3s ease",
+        minHeight: sizeHeight.small,
+        padding: "1.75rem",
+        textDecoration: "none",
+      }}
+      data-cursor-hover
+    >
+      <span
+        className="absolute right-4 bottom-3 select-none pointer-events-none"
+        style={{
+          fontFamily: "var(--font-display)",
+          fontSize: "clamp(3.5rem, 7vw, 5.5rem)",
+          color: hovered ? "var(--color-border)" : "var(--color-bg)",
+          fontWeight: 700,
+          lineHeight: 1,
+          transition: "color 0.3s",
+        }}
+        aria-hidden="true"
+      >
+        ✦
+      </span>
+
+      <span
+        className="absolute top-4 right-4 inline-flex items-center gap-1"
+        style={{
+          fontFamily: "var(--font-mono)",
+          color: "var(--color-accent)",
+          fontSize: "0.58rem",
+          letterSpacing: "0.15em",
+          border: "1px solid var(--color-accent)",
+          padding: "2px 6px",
+        }}
+      >
+        <svg width="9" height="9" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+          <path d="M12 1a5 5 0 0 0-5 5v3H6a3 3 0 0 0-3 3v7a3 3 0 0 0 3 3h12a3 3 0 0 0 3-3v-7a3 3 0 0 0-3-3h-1V6a5 5 0 0 0-5-5zm-3 8V6a3 3 0 0 1 6 0v3H9z" />
+        </svg>
+        NDA
+      </span>
+
+      <div className="relative z-10 h-full flex flex-col justify-between">
+        <div>
+          <p style={{ fontFamily: "var(--font-mono)", color: "var(--color-text-secondary)", fontSize: "0.65rem", letterSpacing: "0.14em", marginBottom: "0.6rem" }}>
+            <ScrambleText text={t.nav.portfolio} /> — +∞
+          </p>
+          <h3
+            style={{
+              fontFamily: "var(--font-display)",
+              fontSize: "var(--size-h3)",
+              letterSpacing: "-0.02em",
+              color: hovered ? "var(--color-accent)" : "var(--color-primary)",
+              fontWeight: 600,
+              lineHeight: 1.2,
+              marginBottom: "0.5rem",
+              transition: "color 0.25s",
+            }}
+          >
+            <ScrambleText text={t.portfolio.privateTitle} />
+          </h3>
+          <p style={{ fontFamily: "var(--font-body)", color: "var(--color-text-secondary)", fontSize: "1rem", lineHeight: "1.65" }}>
+            <ScrambleText text={t.portfolio.privateDesc} />
+          </p>
+        </div>
+
+        <div className="mt-5 flex items-end justify-end">
+          <span
+            className="inline-flex items-center gap-2"
+            style={{ fontFamily: "var(--font-mono)", color: "var(--color-accent)", fontSize: "0.68rem", letterSpacing: "0.12em", whiteSpace: "nowrap" }}
+          >
+            <ScrambleText text={t.portfolio.privateCta} />
+          </span>
+        </div>
+      </div>
+    </motion.a>
+  );
+}
+
 export default function PortfolioSection() {
   const { t } = useLang();
   const projects: Project[] = projectMeta.map((p, i) => ({
@@ -174,6 +274,7 @@ export default function PortfolioSection() {
         {projects.map((p, i) => (
           <ProjectCard key={p.id} project={p} index={i} />
         ))}
+        <PrivateBox index={projects.length} />
       </div>
     </section>
   );

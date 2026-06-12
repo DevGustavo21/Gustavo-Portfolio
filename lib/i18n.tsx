@@ -127,6 +127,10 @@ const es = {
     index: "005 / 007 — PROYECTOS",
     heading: "Proyectos selectos.",
     viewSite: "Ver sitio ↗",
+    privateTitle: "Proyectos privados",
+    privateDesc: "El resto de proyectos que he desarrollado son privados y no los publico. Con gusto te los muestro de forma personal.",
+    privateCta: "Solicitar una muestra ↗",
+    privateWaMessage: "Hola Gustavo, me gustaría que me mostraras tus proyectos privados.",
     projects: [
       { client: "Plataforma · Talento", description: "Conecta talento latinoamericano con empresas remotas de todo el mundo." },
       { client: "E-commerce · Food", description: "E-commerce y experiencia de marca para empresa artesanal de alimentos en EE.UU." },
@@ -327,6 +331,10 @@ const en: typeof es = {
     index: "005 / 007 — PROJECTS",
     heading: "Selected projects.",
     viewSite: "View site ↗",
+    privateTitle: "Private projects",
+    privateDesc: "The rest of the projects I've built are private and not published. I'll gladly walk you through them personally.",
+    privateCta: "Request a walkthrough ↗",
+    privateWaMessage: "Hi Gustavo, I'd like you to walk me through your private projects.",
     projects: [
       { client: "Platform · Talent", description: "Connects Latin American talent with remote companies around the world." },
       { client: "E-commerce · Food", description: "E-commerce and brand experience for an artisan food company in the U.S." },
