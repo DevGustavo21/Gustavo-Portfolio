@@ -92,31 +92,31 @@ const es = {
     heading: "Lo que construyo.",
     items: [
       {
-        title: "Web Development",
+        title: "Desarrollo Web",
         subtitle: "Next.js · Astro · Vue.js",
         description:
           "Aplicaciones web de alto rendimiento construidas con tecnologías modernas. Desde landing pages hasta plataformas complejas — arquitectura limpia, código mantenible, resultados medibles.",
       },
       {
         title: "WordPress",
-        subtitle: "Themes · WooCommerce · Headless",
+        subtitle: "Temas a medida · WooCommerce · Headless",
         description:
           "WordPress como plataforma seria: themes custom, plugins a medida, WooCommerce avanzado, y arquitecturas headless con Next.js como frontend.",
       },
       {
-        title: "UI/UX Implementation",
-        subtitle: "Figma → Código · Design Systems",
+        title: "Implementación UI/UX",
+        subtitle: "Figma → Código · Sistemas de diseño",
         description:
           "Transformo diseños en experiencias reales. Implementación pixel-perfect con sistemas de diseño escalables. Trabajo directo con equipos de diseño o a partir de briefs.",
       },
       {
-        title: "Performance & Animation",
+        title: "Rendimiento y Animación",
         subtitle: "Lenis · Core Web Vitals · Sass",
         description:
           "Animaciones que complementan la experiencia, no la interrumpen. Optimización de Core Web Vitals, scroll fluido y micro-interacciones que distinguen un sitio del resto.",
       },
       {
-        title: "AI-Powered Workflows",
+        title: "Flujos con IA",
         subtitle: "Automatización · Integración · Agentes",
         description:
           "Integración de IA en productos digitales: flujos automatizados, generación de contenido, chatbots y agentes conectados a tu stack existente.",
