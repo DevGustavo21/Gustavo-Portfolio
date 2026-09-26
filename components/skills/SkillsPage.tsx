@@ -22,6 +22,7 @@ function SkillCard({
   index,
   title,
   description,
+  tags,
   categoryLabel,
   downloadLabel,
 }: {
@@ -29,6 +30,7 @@ function SkillCard({
   index: number;
   title: string;
   description: string;
+  tags: string[];
   categoryLabel: string;
   downloadLabel: string;
 }) {
@@ -143,7 +145,7 @@ function SkillCard({
 
         <div className="flex flex-wrap items-end justify-between gap-4">
           <div className="flex flex-wrap gap-2">
-            {skill.tags.map((tag) => (
+            {tags.map((tag) => (
               <span
                 key={tag}
                 style={{
@@ -513,6 +515,7 @@ export default function SkillsPage() {
                   index={i}
                   title={copy.title}
                   description={copy.description}
+                  tags={copy.tags}
                   categoryLabel={t.skills.categories[skill.category]}
                   downloadLabel={t.skills.download}
                 />

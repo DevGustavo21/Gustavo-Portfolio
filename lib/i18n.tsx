@@ -207,7 +207,7 @@ const es = {
     download: "Descargar skill",
     empty: "No hay skills en esta categoría todavía.",
     stats: [
-      { value: "01", label: "Skill publicada" },
+      { value: "05", label: "Skills publicadas" },
       { value: ".SKILL", label: "Formato Claude" },
       { value: "∞", label: "Más en camino" },
     ],
@@ -222,6 +222,31 @@ const es = {
         title: "Optimizador de Prompts",
         description:
           "Convierte ideas desordenadas, notas rápidas o dictados en prompts claros y listos para Claude, ChatGPT, Midjourney, n8n y más.",
+        tags: ["Claude", "Prompts", "IA"],
+      },
+      "web-architect-ai": {
+        title: "Web Architect AI",
+        description:
+          "Conduce un proceso de diseño (estilo, paleta, tipografía, layout) y genera un brief listo para construir sitios únicos, no genéricos.",
+        tags: ["Diseño", "Web", "Awwwards"],
+      },
+      "premium-web-animations": {
+        title: "Premium Web Animations",
+        description:
+          "Animaciones de nivel estudio: ScrollTrigger, parallax, Three.js, GSAP, Lenis y microinteracciones para sitios que se sienten premium.",
+        tags: ["GSAP", "Three.js", "Motion"],
+      },
+      "sales-message-writer": {
+        title: "Sales Message Writer",
+        description:
+          "Redacta mensajes de venta humanos y persuasivos para email, WhatsApp o DM — listos para contactar leads de desarrollo web.",
+        tags: ["Ventas", "WhatsApp", "Email"],
+      },
+      superpowers: {
+        title: "Superpowers",
+        description:
+          "Modo de trabajo senior: entiende, planifica y valida antes de construir. Ideal para proyectos complejos con varias partes.",
+        tags: ["Flujo", "Planificación", "Calidad"],
       },
     },
   },
@@ -447,7 +472,7 @@ const en: typeof es = {
     download: "Download skill",
     empty: "No skills in this category yet.",
     stats: [
-      { value: "01", label: "Published skill" },
+      { value: "05", label: "Published skills" },
       { value: ".SKILL", label: "Claude format" },
       { value: "∞", label: "More coming" },
     ],
@@ -462,6 +487,31 @@ const en: typeof es = {
         title: "Prompt Optimizer",
         description:
           "Turns messy ideas, quick notes or voice dumps into clear prompts ready for Claude, ChatGPT, Midjourney, n8n and more.",
+        tags: ["Claude", "Prompts", "AI"],
+      },
+      "web-architect-ai": {
+        title: "Web Architect AI",
+        description:
+          "Runs a design process (style, palette, typography, layout) and produces a brief ready to build unique, non-generic sites.",
+        tags: ["Design", "Web", "Awwwards"],
+      },
+      "premium-web-animations": {
+        title: "Premium Web Animations",
+        description:
+          "Studio-grade motion: ScrollTrigger, parallax, Three.js, GSAP, Lenis and micro-interactions for premium-feeling sites.",
+        tags: ["GSAP", "Three.js", "Motion"],
+      },
+      "sales-message-writer": {
+        title: "Sales Message Writer",
+        description:
+          "Writes human, persuasive sales messages for email, WhatsApp or DMs — ready to contact web development leads.",
+        tags: ["Sales", "WhatsApp", "Email"],
+      },
+      superpowers: {
+        title: "Superpowers",
+        description:
+          "Senior work mode: understand, plan and validate before building. Built for complex multi-part projects.",
+        tags: ["Workflow", "Planning", "Quality"],
       },
     },
   },
