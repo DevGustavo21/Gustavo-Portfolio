@@ -74,6 +74,16 @@ export default function SideNav() {
     return () => window.removeEventListener("scroll", update);
   }, [isHome, isSkills]);
 
+  // Lock body scroll while the mobile menu is open
+  useEffect(() => {
+    if (!mobileOpen) return;
+    const prev = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    return () => {
+      document.body.style.overflow = prev;
+    };
+  }, [mobileOpen]);
+
   const handleClick = (e: React.MouseEvent, link: NavLink) => {
     e.preventDefault();
     setMobileOpen(false);
@@ -190,40 +200,55 @@ export default function SideNav() {
         initial={false}
         animate={{ opacity: mobileOpen ? 1 : 0, pointerEvents: mobileOpen ? "auto" : "none" }}
         transition={{ duration: 0.3 }}
-        className="fixed inset-0 z-[55] flex flex-col justify-center items-center md:hidden"
-        style={{ backgroundColor: "var(--color-bg)" }}
+        className="fixed inset-0 z-[55] flex flex-col md:hidden"
+        style={{
+          backgroundColor: "var(--color-bg)",
+          paddingTop: "max(4.5rem, env(safe-area-inset-top))",
+          paddingBottom: "max(1.25rem, env(safe-area-inset-bottom))",
+        }}
       >
-        <div className="flex flex-col items-center gap-10">
-          {links.map((link, i) => (
-            <motion.a
-              key={link.id}
-              href={link.kind === "page" ? link.href : isHome ? link.href : `/${link.href}`}
-              onClick={(e) => handleClick(e, link)}
-              initial={{ opacity: 0, y: 20 }}
-              animate={mobileOpen ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-              transition={{ delay: i * 0.07 + 0.1 }}
-              style={{
-                fontFamily: "var(--font-display)",
-                fontSize: "clamp(2.2rem, 9vw, 3.8rem)",
-                letterSpacing: "-0.03em",
-                color: active === link.id ? "var(--color-accent)" : "var(--color-primary)",
-                textDecoration: "none",
-                fontWeight: 700,
-                transition: "color 0.2s",
-              }}
-            >
-              <ScrambleText text={t.nav[link.id]} />
-            </motion.a>
-          ))}
-        </div>
+        <nav
+          className="flex-1 min-h-0 overflow-y-auto overscroll-contain flex flex-col justify-center items-center px-6"
+          style={{ WebkitOverflowScrolling: "touch" }}
+          aria-label="Mobile navigation"
+        >
+          <div
+            className="flex flex-col items-center w-full max-w-[20rem]"
+            style={{ gap: "clamp(0.7rem, 2.4vh, 1.35rem)", padding: "0.5rem 0 1rem" }}
+          >
+            {links.map((link, i) => (
+              <motion.a
+                key={link.id}
+                href={link.kind === "page" ? link.href : isHome ? link.href : `/${link.href}`}
+                onClick={(e) => handleClick(e, link)}
+                initial={{ opacity: 0, y: 16 }}
+                animate={mobileOpen ? { opacity: 1, y: 0 } : { opacity: 0, y: 16 }}
+                transition={{ delay: i * 0.045 + 0.08 }}
+                className="w-full text-center"
+                style={{
+                  fontFamily: "var(--font-display)",
+                  fontSize: "clamp(1.55rem, 6.5vw, 2.35rem)",
+                  letterSpacing: "-0.03em",
+                  lineHeight: 1.1,
+                  color: active === link.id ? "var(--color-accent)" : "var(--color-primary)",
+                  textDecoration: "none",
+                  fontWeight: 700,
+                  transition: "color 0.2s",
+                }}
+              >
+                <ScrambleText text={t.nav[link.id]} />
+              </motion.a>
+            ))}
+          </div>
+        </nav>
 
         <p
-          className="absolute bottom-10"
+          className="shrink-0 text-center px-4"
           style={{
             fontFamily: "var(--font-mono)",
             color: "var(--color-muted)",
-            fontSize: "0.65rem",
-            letterSpacing: "0.15em",
+            fontSize: "0.58rem",
+            letterSpacing: "0.14em",
           }}
         >
           CRAFTED CODE HUB · MANAGUA NI
