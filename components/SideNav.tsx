@@ -1,22 +1,38 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { motion } from "framer-motion";
 import { useLang } from "@/lib/i18n";
 import ScrambleText from "@/components/ScrambleText";
 import LanguageSwitcher from "@/components/LanguageSwitcher";
 
-type NavId = "home" | "about" | "experience" | "services" | "portfolio" | "tools" | "contact";
+type NavId =
+  | "home"
+  | "about"
+  | "experience"
+  | "services"
+  | "portfolio"
+  | "tools"
+  | "skills"
+  | "contact";
 
-const links: { href: string; id: NavId }[] = [
-  { href: "#home", id: "home" },
-  { href: "#about", id: "about" },
-  { href: "#experience", id: "experience" },
-  { href: "#services", id: "services" },
-  { href: "#portfolio", id: "portfolio" },
-  { href: "#tools", id: "tools" },
-  { href: "#contact", id: "contact" },
+type NavLink = {
+  id: NavId;
+  /** Hash section on home, or absolute path for standalone pages */
+  href: string;
+  kind: "section" | "page";
+};
+
+const links: NavLink[] = [
+  { href: "#home", id: "home", kind: "section" },
+  { href: "#about", id: "about", kind: "section" },
+  { href: "#experience", id: "experience", kind: "section" },
+  { href: "#services", id: "services", kind: "section" },
+  { href: "#portfolio", id: "portfolio", kind: "section" },
+  { href: "#tools", id: "tools", kind: "section" },
+  { href: "/skills", id: "skills", kind: "page" },
+  { href: "#contact", id: "contact", kind: "section" },
 ];
 
 function scrollToSection(id: string) {
@@ -29,17 +45,26 @@ function scrollToSection(id: string) {
 export default function SideNav() {
   const { t } = useLang();
   const pathname = usePathname();
+  const router = useRouter();
   const [active, setActive] = useState("home");
   const [mobileOpen, setMobileOpen] = useState(false);
+  const isHome = pathname === "/";
+  const isSkills = pathname?.startsWith("/skills");
 
-  // Track active section based on scroll position
+  // Track active section based on scroll position (home only)
   useEffect(() => {
+    if (!isHome) {
+      if (isSkills) setActive("skills");
+      return;
+    }
+
     const update = () => {
       const scrollY = window.scrollY + window.innerHeight * 0.35;
       let current = "home";
-      for (const { id } of links) {
-        const el = document.getElementById(id);
-        if (el && el.offsetTop <= scrollY) current = id;
+      for (const link of links) {
+        if (link.kind !== "section") continue;
+        const el = document.getElementById(link.id);
+        if (el && el.offsetTop <= scrollY) current = link.id;
       }
       setActive(current);
     };
@@ -47,12 +72,23 @@ export default function SideNav() {
     update();
     window.addEventListener("scroll", update, { passive: true });
     return () => window.removeEventListener("scroll", update);
-  }, []);
+  }, [isHome, isSkills]);
 
-  const handleClick = (e: React.MouseEvent, id: string) => {
+  const handleClick = (e: React.MouseEvent, link: NavLink) => {
     e.preventDefault();
     setMobileOpen(false);
-    scrollToSection(id);
+
+    if (link.kind === "page") {
+      router.push(link.href);
+      return;
+    }
+
+    if (isHome) {
+      scrollToSection(link.id);
+      return;
+    }
+
+    router.push(`/${link.href}`);
   };
 
   // Hide global nav on standalone pages like the suspended-site notice.
@@ -85,8 +121,8 @@ export default function SideNav() {
                 style={{ display: "block", height: "2px", borderRadius: "1px", minWidth: "2px" }}
               />
               <a
-                href={link.href}
-                onClick={(e) => handleClick(e, link.id)}
+                href={link.kind === "page" ? link.href : isHome ? link.href : `/${link.href}`}
+                onClick={(e) => handleClick(e, link)}
                 style={{
                   fontFamily: "var(--font-mono)",
                   fontSize: "0.65rem",
@@ -129,9 +165,11 @@ export default function SideNav() {
               key={i}
               animate={
                 mobileOpen
-                  ? i === 0 ? { rotate: 45, y: 7 }
-                  : i === 1 ? { opacity: 0, scaleX: 0 }
-                  : { rotate: -45, y: -7 }
+                  ? i === 0
+                    ? { rotate: 45, y: 7 }
+                    : i === 1
+                      ? { opacity: 0, scaleX: 0 }
+                      : { rotate: -45, y: -7 }
                   : { rotate: 0, y: 0, opacity: 1, scaleX: 1 }
               }
               transition={{ duration: 0.25 }}
@@ -159,8 +197,8 @@ export default function SideNav() {
           {links.map((link, i) => (
             <motion.a
               key={link.id}
-              href={link.href}
-              onClick={(e) => handleClick(e, link.id)}
+              href={link.kind === "page" ? link.href : isHome ? link.href : `/${link.href}`}
+              onClick={(e) => handleClick(e, link)}
               initial={{ opacity: 0, y: 20 }}
               animate={mobileOpen ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
               transition={{ delay: i * 0.07 + 0.1 }}

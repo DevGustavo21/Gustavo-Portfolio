@@ -12,6 +12,7 @@ const es = {
     services: "Servicios",
     portfolio: "Proyectos",
     tools: "Herramientas",
+    skills: "Skills",
     contact: "Contacto",
   },
   navMobileTag: "CRAFTED CODE HUB · MANAGUA NI",
@@ -189,6 +190,41 @@ const es = {
     contactLabel: "CONTACTO",
     rights: "Todos los derechos reservados",
   },
+  skills: {
+    label: "Claude Skills — Instalables · Managua, NI",
+    heading: "SKILLS",
+    descr:
+      "Skills listas para instalar en Claude. Cada una convierte un flujo repetible en una capacidad: prompts, automatización y productividad, diseñadas con la misma precisión que mi trabajo en producto.",
+    ctaBrowse: "[ Ver catálogo ]",
+    ctaHome: "[ Volver al inicio ]",
+    sideLabel: "Claude Skills — Descarga e instala",
+    index: "001 / SKILLS — CATÁLOGO",
+    catalogHeading: "Instala. Activa. Escala.",
+    catalogSub:
+      "Descarga el archivo .skill e instálalo en Claude. Filtra por categoría — el catálogo crecerá con más herramientas.",
+    filterLabel: "Filtrar por categoría",
+    filterAll: "Todas",
+    download: "Descargar skill",
+    empty: "No hay skills en esta categoría todavía.",
+    stats: [
+      { value: "01", label: "Skill publicada" },
+      { value: ".SKILL", label: "Formato Claude" },
+      { value: "∞", label: "Más en camino" },
+    ],
+    categories: {
+      prompting: "Prompting",
+      automation: "Automatización",
+      development: "Desarrollo",
+      productivity: "Productividad",
+    },
+    items: {
+      "optimizador-prompts": {
+        title: "Optimizador de Prompts",
+        description:
+          "Convierte ideas desordenadas, notas rápidas o dictados en prompts claros y listos para Claude, ChatGPT, Midjourney, n8n y más.",
+      },
+    },
+  },
   suspended: {
     statusTag: "ERROR 503 · SERVICIO SUSPENDIDO",
     metaLeft: "HOST · GUSTAVO MEJIA",
@@ -216,6 +252,7 @@ const en: typeof es = {
     services: "Services",
     portfolio: "Projects",
     tools: "Tools",
+    skills: "Skills",
     contact: "Contact",
   },
   navMobileTag: "CRAFTED CODE HUB · MANAGUA NI",
@@ -392,6 +429,41 @@ const en: typeof es = {
     navigation: "NAVIGATION",
     contactLabel: "CONTACT",
     rights: "All rights reserved",
+  },
+  skills: {
+    label: "Claude Skills — Installable · Managua, NI",
+    heading: "SKILLS",
+    descr:
+      "Skills ready to install in Claude. Each one turns a repeatable workflow into a capability — prompting, automation and productivity, built with the same precision as my product work.",
+    ctaBrowse: "[ Browse catalog ]",
+    ctaHome: "[ Back to home ]",
+    sideLabel: "Claude Skills — Download & install",
+    index: "001 / SKILLS — CATALOG",
+    catalogHeading: "Install. Activate. Scale.",
+    catalogSub:
+      "Download the .skill file and install it in Claude. Filter by category — more tools are on the way.",
+    filterLabel: "Filter by category",
+    filterAll: "All",
+    download: "Download skill",
+    empty: "No skills in this category yet.",
+    stats: [
+      { value: "01", label: "Published skill" },
+      { value: ".SKILL", label: "Claude format" },
+      { value: "∞", label: "More coming" },
+    ],
+    categories: {
+      prompting: "Prompting",
+      automation: "Automation",
+      development: "Development",
+      productivity: "Productivity",
+    },
+    items: {
+      "optimizador-prompts": {
+        title: "Prompt Optimizer",
+        description:
+          "Turns messy ideas, quick notes or voice dumps into clear prompts ready for Claude, ChatGPT, Midjourney, n8n and more.",
+      },
+    },
   },
   suspended: {
     statusTag: "ERROR 503 · SERVICE SUSPENDED",
