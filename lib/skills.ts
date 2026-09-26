@@ -1,7 +1,14 @@
 export type SkillCategoryId = "prompting" | "automation" | "development" | "productivity";
 
+export type SkillId =
+  | "optimizador-prompts"
+  | "web-architect-ai"
+  | "premium-web-animations"
+  | "sales-message-writer"
+  | "superpowers";
+
 export type SkillMeta = {
-  id: string;
+  id: SkillId;
   category: SkillCategoryId;
   file: string;
 };

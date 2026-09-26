@@ -507,7 +507,6 @@ export default function SkillsPage() {
           <AnimatePresence mode="popLayout">
             {filtered.map((skill, i) => {
               const copy = t.skills.items[skill.id];
-              if (!copy) return null;
               return (
                 <SkillCard
                   key={skill.id}
